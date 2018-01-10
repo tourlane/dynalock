@@ -10,6 +10,10 @@ too big, Cloudwatch was scheduling tasks, even if the same task was already
 present. Dynalock solves this issue, ensuring that any new task exit and fails
 before starting the real work.
 
+The first assumption is that something like this should exists, but normally
+not as a command line program (if you found any, please let us know). So we
+created our own.
+
 ## Installation
 
 Add this line to your application's Gemfile:
