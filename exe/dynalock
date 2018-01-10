@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+
+if ARGV[0].nil?
+  $stderr.puts "Usage: #{$0} COMMAND"
+  exit(-1)
+end
+
+require 'dynalock'
+
+include Dynalock::Lock
+
+begin
+  with_lock(context: ARGV[0]) do
+    system(*ARGV)
+  end
+rescue Locked
+  $stderr.puts "This program is already running"
+  exit(-3)
+end
