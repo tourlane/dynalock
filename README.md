@@ -1,12 +1,12 @@
 # Dynalock
 
-Dynalock is a distributed lock that uses *DynamoDB*.
+*Dynalock* is a distributed lock that uses *DynamoDB*.
 
 ## Background
 
-At tourlane we were running cronjobs through AWS ECS. Once the cluster became
-too big, Cloudwatch was scheduling tasks, even if the same task was already
-present. Dynalock solves this issue, ensuring that any new task exits and fails
+At *Tourlane* we were running cronjobs through *Amazon ECS*. Once the cluster became
+too big, *CloudWatch* was scheduling tasks, even if the same task was already
+present. *Dynalock* solves this issue, ensuring that any new task exits and fails
 before starting the real work.
 
 The first assumption is that something like this should exist, but normally
@@ -94,7 +94,7 @@ License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
 
-Everyone interacting in the Dynalock project’s codebases, issue trackers, chat
+Everyone interacting in the *Dynalock* project’s codebases, issue trackers, chat
 rooms and mailing lists is expected to follow the [code of
-conduct](https://github.com/guillermo/dynalock/blob/master/CODE_OF_CONDUCT.md).
+conduct](https://github.com/guillermo//blob/master/CODE_OF_CONDUCT.md).
 
