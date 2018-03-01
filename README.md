@@ -1,6 +1,6 @@
 # Dynalock
 
-Dynalock is a distributed lock that uses dynamod db.
+Dynalock is a distributed lock that uses *DynamoDB*.
 
 
 ## Background
@@ -30,7 +30,7 @@ Or install it yourself as:
 
     $ gem install dynalock
 
-You need to create a table in dynamo db with "id" as a primary key, and "expires" as expires.
+You need to create a table in *DynamoDB* with "id" as a primary key, and "expires" as expires.
 The default table name is "locks"
 
 
@@ -72,7 +72,7 @@ with_lock(context: "my_lock") { "Only run this" }
 $ dynalock my_program
 ```
 
-This will try to adquire to a lock in dynamodb for 10 seconds, and refresh it every 5 seconds and run your program. The command will be context.
+This will try to adquire to a lock in *DynamoDB* for 10 seconds, and refresh it every 5 seconds and run your program. The command will be context.
 
 ## Development
 
