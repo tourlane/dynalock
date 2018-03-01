@@ -4,12 +4,12 @@ Dynalock is a distributed lock that uses *DynamoDB*.
 
 ## Background
 
-At tourlane we were running cronjobs through AWS ECS. Once the cluster become
+At tourlane we were running cronjobs through AWS ECS. Once the cluster became
 too big, Cloudwatch was scheduling tasks, even if the same task was already
-present. Dynalock solves this issue, ensuring that any new task exit and fails
+present. Dynalock solves this issue, ensuring that any new task exits and fails
 before starting the real work.
 
-The first assumption is that something like this should exists, but normally
+The first assumption is that something like this should exist, but normally
 not as a command line program (if you found any, please let us know). So we
 created our own.
 
@@ -30,11 +30,11 @@ Or install it yourself as:
     $ gem install dynalock
 
 You need to create a table in *DynamoDB* with "id" as a primary key, and "expires" as expires.
-The default table name is "locks"
+The default table name is "locks".
 
 ## Usage
 
-Set the environment variables to its proper values.
+Set the following environment variables to their proper values:
 
     AWS_ACCESS_KEY_ID
     AWS_REGION
@@ -66,7 +66,7 @@ with_lock(context: "my_lock") { "Only run this" }
 $ dynalock my_program
 ```
 
-This will try to adquire to a lock in *DynamoDB* for 10 seconds, and refresh it every 5 seconds and run your program. The command will be context.
+This will try to acquire a lock in *DynamoDB* for 10 seconds, and refresh it every 5 seconds and run your program. The command will be context.
 
 ## Development
 
