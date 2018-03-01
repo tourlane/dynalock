@@ -82,8 +82,8 @@ git commits and tags, and push the `.gem` file to
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at
-https://github.com/guillermo/dynalock. This project is intended to be a safe,
+Bug reports and pull requests are welcome on *GitHub* at
+https://github.com/tourlane/dynalock. This project is intended to be a safe,
 welcoming space for collaboration, and contributors are expected to adhere to
 the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
