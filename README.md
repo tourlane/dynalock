@@ -96,5 +96,5 @@ License](https://opensource.org/licenses/MIT).
 
 Everyone interacting in the *Dynalock* project’s codebases, issue trackers, chat
 rooms and mailing lists is expected to follow the [code of
-conduct](https://github.com/guillermo//blob/master/CODE_OF_CONDUCT.md).
+conduct](https://github.com/tourlane/dynalock/blob/master/CODE_OF_CONDUCT.md).
 
