@@ -2,7 +2,6 @@
 
 Dynalock is a distributed lock that uses *DynamoDB*.
 
-
 ## Background
 
 At tourlane we were running cronjobs through AWS ECS. Once the cluster become
@@ -33,17 +32,13 @@ Or install it yourself as:
 You need to create a table in *DynamoDB* with "id" as a primary key, and "expires" as expires.
 The default table name is "locks"
 
-
 ## Usage
 
-
 Set the environment variables to its proper values.
-
 
     AWS_ACCESS_KEY_ID
     AWS_REGION
     AWS_SECRET_ACCESS_KEY
-
 
 ### Usage inside ruby
 
@@ -64,7 +59,6 @@ adquire_lock(context: "my_lock")
 refresh_lock(context: "my_lock")
 with_lock(context: "my_lock") { "Only run this" }
 ```
-
 
 ### Usage through the command line
 
