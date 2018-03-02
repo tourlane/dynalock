@@ -1,0 +1,23 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/dynalock
+
+    docker:
+      - image: circleci/ruby:2.4
+
+    steps:
+      - checkout
+
+      # Dependencies
+      - restore_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      # Test
+      - run: bundle exec rake test
