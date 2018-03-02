@@ -3,12 +3,12 @@ require 'aws-sdk-dynamodb'
 module Dynalock
   module Lock
     class Locked < Exception ; end
-    def adquire_lock(context:, owner: lock_default_owner, table: "locks", expire_time: 10)
+    def acquire_lock(context:, owner: lock_default_owner, table: "locks", expire_time: 10)
       dynamodb_client.put_item(
 	table_name: table,
 	item: {
 	  id: context,
-	  lock_owner: owner, 
+	  lock_owner: owner,
 	  expires: Time.now.utc.to_i + expire_time
 	},
 	condition_expression: "attribute_not_exists(expires) OR expires < :expires",
@@ -27,7 +27,7 @@ module Dynalock
 	key: { id: context },
 	update_expression: "SET expires = :expires",
 	condition_expression: "attribute_exists(expires) AND expires > :now AND lock_owner = :owner",
-	expression_attribute_values: { 
+	expression_attribute_values: {
 	  ":expires": Time.now.utc.to_i + expire_time,
 	  ":owner": owner,
 	  ":now": Time.now.utc.to_i
@@ -41,7 +41,7 @@ module Dynalock
     def with_lock(context:, owner: lock_default_owner, table: "locks")
       expire_time = 5
 
-      result = adquire_lock(context: context, owner: owner, table: table, expire_time: expire_time)
+      result = acquire_lock(context: context, owner: owner, table: table, expire_time: expire_time)
       raise Locked.new if result == false
 
       thread = Thread.new {
