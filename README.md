@@ -47,7 +47,7 @@ require 'dynalock'
 
 include Dynalock::Lock
 
-adquire_lock(context: "my_lock", table: TABLE, owner: @owner, expire_time: 10)
+acquire_lock(context: "my_lock", table: TABLE, owner: @owner, expire_time: 10)
 refresh_lock(context: "my_lock", table: TABLE, owner: @owner, expire_time: 10)
 with_lock(context: "my_lock", table: TABLE, owner: @owner) { "Only run this" }
 ```
@@ -55,7 +55,7 @@ with_lock(context: "my_lock", table: TABLE, owner: @owner) { "Only run this" }
 Most of the paramenters are optional
 
 ```ruby
-adquire_lock(context: "my_lock")
+acquire_lock(context: "my_lock")
 refresh_lock(context: "my_lock")
 with_lock(context: "my_lock") { "Only run this" }
 ```
