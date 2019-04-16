@@ -6,6 +6,10 @@ jobs:
 
     docker:
       - image: circleci/ruby:2.4
+        environment:
+          - DYNAMODB_CREATE_TEST_TABLE: 1
+          - DYNAMODB_ENDPOINT: "http://localhost:8000"
+      - image: amazon/dynamodb-local
 
     steps:
       - checkout
