@@ -80,6 +80,22 @@ release a new version, update the version number in `version.rb`, and then run
 git commits and tags, and push the `.gem` file to
 [rubygems.org](https://rubygems.org).
 
+## How to run tests locally
+
+By default, the test suite will try to connect to AWS DynamoDB.
+
+To work locally instead, you can use the [local version of DynamoDB](https://aws.amazon.com/about-aws/whats-new/2018/08/use-amazon-dynamodb-local-more-easily-with-the-new-docker-image/) via Docker:
+
+```
+docker run -p 8000:8000 amazon/dynamodb-local
+```
+
+Then instruct the test suite to create the table & target that local instance:
+
+```
+DYNAMODB_CREATE_TEST_TABLE=1 DYNAMODB_ENDPOINT=http://localhost:8000 bundle exec rake
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on *GitHub* at

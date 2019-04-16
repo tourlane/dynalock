@@ -3,8 +3,36 @@ require "test_helper"
 class DynalockTest < Minitest::Test
   include Dynalock::Lock
 
+  def create_table(client)
+    client.create_table(table_name: TABLE,
+      attribute_definitions: [
+        {
+          attribute_name: "id",
+          attribute_type: "S"
+        }
+      ],
+      key_schema: [
+        {
+          attribute_name: "id",
+          key_type: "HASH"
+        }
+      ],
+      provisioned_throughput: {
+        read_capacity_units: 5,
+        write_capacity_units: 5,
+      }
+    )
+  end
+
   def setup
     @owner = "#{ENV["USER"]}@#{`hostname`.strip}"
+
+    if ENV['DYNAMODB_CREATE_TEST_TABLE'] == '1'
+      begin
+        create_table(client)
+      rescue Aws::DynamoDB::Errors::ResourceInUseException
+      end
+    end
   end
 
   TABLE="test"
@@ -80,7 +108,24 @@ class DynalockTest < Minitest::Test
   end
 
   def client
-    Aws::DynamoDB::Client.new
+    if ENV['DYNAMODB_ENDPOINT']
+      Aws::DynamoDB::Client.new(
+        region: 'foobar',
+        access_key_id: 'foobar',
+        secret_access_key: 'foobar',
+        endpoint: ENV['DYNAMODB_ENDPOINT']
+      )
+    else
+      Aws::DynamoDB::Client.new
+    end
+  end
+
+  # NOTE: because this code includes the Dynalock::Lock module, we can override
+  # the client here and reuse the same client definition (which helps to test locally)
+  # It would be better, though, to refactor the existing code to let the user override
+  # the client more explicitely
+  def dynamodb_client
+    client
   end
 
   def delete(name)
